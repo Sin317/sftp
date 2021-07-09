@@ -53,6 +53,8 @@ spec:
 
     spec:
       #secrets and config
+      imagePullSecrets:
+      - name: regcred #the secret created for docker credentials
       containers:
       #the sftp server itself
       - name: sftp
