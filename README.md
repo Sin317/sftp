@@ -34,6 +34,9 @@ Steps to be followed:
 6. Create deployment and service:  
       `oc apply -f deployment.yaml`
 
+--------------------------------------
+In case ha-proxy is available:
+
 7. Configure loadbalancer :
 
     Edit /etc/haproxy/haproxy.cfg to add the entries:
@@ -61,3 +64,19 @@ Steps to be followed:
 9. Access sftp service through:  
     sftp -P [exposed port] [user]@[sftp-route]   
     Eg: sftp -P 2222 admin@sftp-rgv-lb-sftp.apps.raghavocp46.cp.fyre.ibm.com
+    
+-----------------------
+In case ha-proxy isn't available and you want to reach the sftp using NodePort:  
+ 
+7. Access sftp service through:  
+`sftp -P <NodePort> <user>@<master node IP>`  
+
+    for example: here NodePort is: 30654  
+    `oc get svc  
+    NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE sftp NodePort 172.30.121.53 <none> 2222:30654/TCP 12h`  
+
+    and master node IP can be any one of the following internal IP's:  
+    `oc get no -o wide` 
+
+If the service is not working properly ie the access to nodeport isnt working, run this command:   
+`oc expose deploy sftp --type=NodePort --name=sftp`  
