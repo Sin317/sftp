@@ -1,6 +1,6 @@
 In case ha-proxy isn't available and you want to reach the sftp using NodePort:
 
-1. If the service is not working properly ie the access to nodeport isnt working, run this command:
+1. If the service is not working properly ie the access to nodeport isnt working, run this command: 
   `oc expose deploy sftp --type=NodePort --name=sftp` 
  
 2. Use this to access the sftp by:
