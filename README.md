@@ -78,5 +78,3 @@ In case ha-proxy isn't available and you want to reach the sftp using NodePort:
     and master node IP can be any one of the following internal IP's:  
     `oc get no -o wide` 
 
-If the service is not working properly ie the access to nodeport isnt working, run this command:   
-`oc expose deploy sftp --type=NodePort --name=sftp`  
