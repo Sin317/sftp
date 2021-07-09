@@ -15,20 +15,24 @@
 Steps to be followed:  
 1. Ensure to have docker image ready as mentioned in SFTP Centos Image Creation
 2. Create namespace:  
-    kubectl create namespace sftp  
-    
+    `kubectl create namespace sftp `  
+2a. use the sftp project:  
+        `oc project sftp`     
+2b. Create a secret to store your docker credentials:  
+        `oc create secret docker-registry regcred --docker-server=docker.io --docker-username=<username> --docker-password=<pass> --docker-email=<email> -n sftp`  
 *// Update the files according to your custom values if necessary before applying for the following steps //*  
 
+
 3. Create persistent volume:  
-    oc apply -f persistent_volume.yaml 
+    `oc apply -f persistent_volume.yaml` 
 4. Create volume claim:  
-    oc apply -f pvolume_claim.yaml
+    `oc apply -f pvolume_claim.yaml`
 5. For privileged access run the command:  
-    oc adm policy add-scc-to-user privileged -z default -n sftp  
+    `oc adm policy add-scc-to-user privileged -z default -n sftp`  
 
 
 6. Create deployment and service:  
-      oc apply -f deployment.yaml
+      `oc apply -f deployment.yaml`
 
 7. Configure loadbalancer :
 
