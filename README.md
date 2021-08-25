@@ -15,7 +15,7 @@
 Steps to be followed:  
 1. Ensure to have docker image ready as mentioned in SFTP Centos Image Creation
 2. Create namespace:  
-    `kubectl create namespace sftp `  
+    `oc create namespace sftp `  
 2a. use the sftp project:  
         `oc project sftp`     
 2b. Create a secret to store your docker credentials:  
@@ -39,7 +39,7 @@ In case ha-proxy is available:
 
 7. Configure loadbalancer :
 
-    Edit /etc/haproxy/haproxy.cfg to add the entries:
+    Edit /etc/haproxy/haproxy.cfg to add the entries: 
 
     ```
     frontend fe_ssh
@@ -56,7 +56,8 @@ In case ha-proxy is available:
         server worker1 10.17.23.98:31336 check
         server worker2 10.17.28.68:31336 check
    ```
-
+   Refresh the haproxy service by:  
+   `sudo systemctl restart haproxy.service`
 
 8. Create route:  
     oc expose service [service name]  
